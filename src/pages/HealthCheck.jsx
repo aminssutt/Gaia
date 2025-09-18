@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import AvatarViewer from '../components/AvatarViewer'
 import HealthData from '../components/HealthData'
 import RecommendationPopup from '../components/RecommendationPopup'
+import ConfirmationPopup from '../components/ConfirmationPopup'
 import './HealthCheck.css'
 
 function HealthCheck({ onNavigate, gender }) {
@@ -17,6 +18,46 @@ function HealthCheck({ onNavigate, gender }) {
   const [isTesting, setIsTesting] = useState(false)
   const [showRecommendation, setShowRecommendation] = useState(false)
   const [recommendation, setRecommendation] = useState('')
+  const [showConfirmation, setShowConfirmation] = useState(false)
+  const [selectedBodyPart, setSelectedBodyPart] = useState('')
+  const [selectedPartId, setSelectedPartId] = useState('')
+
+  const handleShowConfirmation = (label) => {
+    // Map label to id
+    const pointsData = {
+      male: [
+        { id: 'head', label: 'Head' },
+        { id: 'neck', label: 'Neck' },
+        { id: 'shoulders', label: 'Shoulders' },
+        { id: 'arms', label: 'Arms' },
+        { id: 'wrists', label: 'Wrists' },
+        { id: 'back', label: 'Back' },
+        { id: 'legs', label: 'Legs' },
+      ],
+      female: [
+        { id: 'head', label: 'Head' },
+        { id: 'neck', label: 'Neck' },
+        { id: 'shoulders', label: 'Shoulders' },
+        { id: 'arms', label: 'Arms' },
+        { id: 'wrists', label: 'Wrists' },
+        { id: 'back', label: 'Back' },
+        { id: 'legs', label: 'Legs' },
+      ],
+    };
+    
+    setSelectedBodyPart(label);
+    setSelectedPartId(pointsData[gender].find(point => point.label === label)?.id);
+    setShowConfirmation(true);
+  };
+
+  const handleConfirm = () => {
+    setShowConfirmation(false);
+    onNavigate('exerciseDetail', { exerciseId: selectedPartId });
+  };
+
+  const handleCancel = () => {
+    setShowConfirmation(false);
+  };
 
   const generateRandomData = () => {
     const newData = {
@@ -105,14 +146,14 @@ function HealthCheck({ onNavigate, gender }) {
 
         <div className="avatar-container">
           <Canvas
-            camera={{ position: [0, 1, 5], fov: 55 }}
+            camera={{ position: [2, 1, 4], fov: 50 }}
             style={{ width: '600px', height: '500px' }}
             onPointerMiss={() => console.log('miss')}
           >
             <ambientLight intensity={0.6} />
             <directionalLight position={[10, 10, 5]} intensity={1} />
             <directionalLight position={[-10, -10, -5]} intensity={0.3} />
-            <AvatarViewer gender={gender} onNavigate={onNavigate} />
+            <AvatarViewer gender={gender} onNavigate={onNavigate} onShowConfirmation={handleShowConfirmation} />
           </Canvas>
           <button s
             className={`test-data-btn ${isTesting ? 'testing' : ''}`}
@@ -153,6 +194,14 @@ function HealthCheck({ onNavigate, gender }) {
             setShowRecommendation(false)
             onNavigate('exercises')
           }}
+        />
+      )}
+
+      {showConfirmation && (
+        <ConfirmationPopup
+          bodyPart={selectedBodyPart}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
         />
       )}
     </div>
