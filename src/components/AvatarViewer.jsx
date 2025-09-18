@@ -32,7 +32,7 @@ function Model({ gender, onShowConfirmation }) {
 
   return (
     <group ref={groupRef}>
-      <primitive object={gltf.scene} scale={1.5} position={[0, -1.3, 0]} />
+      <primitive object={gltf.scene} scale={1.5} position={[0, -1.3, 0]} rotation={[0, Math.PI/6, 0]} />
       {pointsData[gender].map(point => (
         <InteractivePoint
           key={point.id}
