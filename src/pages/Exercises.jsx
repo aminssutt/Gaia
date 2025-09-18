@@ -1,59 +1,20 @@
-import React, { useState } from 'react'
-import VideoPlayer from '../components/VideoPlayer'
-import HistoryPopup from '../components/HistoryPopup'
-import './Exercises.css'
+import React from 'react';
+import './Exercises.css';
 
 function Exercises({ onNavigate }) {
-  const [selectedCategory, setSelectedCategory] = useState('neck')
-  const [showHistory, setShowHistory] = useState(false)
-
   const categories = [
-    { id: 'neck', name: 'Neck', icon: '🦴' },
-    { id: 'back', name: 'Back', icon: '🦴' },
-    { id: 'legs', name: 'Legs', icon: '🦵' },
-    { id: 'wrists', name: 'Wrists', icon: '✋' },
-    { id: 'shoulders', name: 'Shoulders', icon: '💪' },
-    { id: 'arms', name: 'Arms', icon: '💪' },
-    { id: 'breathing', name: 'Breathing', icon: '🫁' }
-  ]
+    { id: 'neck', name: 'Neck', icon: '🦴', description: 'Stretches and exercises for neck pain and stiffness.' },
+    { id: 'back', name: 'Back', icon: '🦾', description: 'Strengthen your back and improve your posture.' },
+    { id: 'legs', name: 'Legs', icon: '🦵', description: 'Workouts for stronger and more flexible legs.' },
+    { id: 'wrists', name: 'Wrists', icon: '✋', description: 'Improve mobility and prevent wrist injuries.' },
+    { id: 'shoulders', name: 'Shoulders', icon: '💪', description: 'Exercises for shoulder mobility and strength.' },
+    { id: 'arms', name: 'Arms', icon: '💪', description: 'Tone and strengthen your arms.' },
+    { id: 'breathing', name: 'Breathing', icon: '🫁', description: 'Techniques for relaxation and better breathing.' }
+  ];
 
-  const videos = {
-    neck: {
-      title: 'Neck Exercises',
-      description: 'Stretching and strengthening for the neck',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' // Placeholder
-    },
-    back: {
-      title: 'Back Exercises',
-      description: 'Back strengthening and stretching',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-    },
-    legs: {
-      title: 'Leg Exercises',
-      description: 'Leg stretching and strengthening',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-    },
-    wrists: {
-      title: 'Wrist Exercises',
-      description: 'Mobility and strengthening for wrists',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-    },
-    shoulders: {
-      title: 'Shoulder Exercises',
-      description: 'Shoulder stretching and strengthening',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-    },
-    arms: {
-      title: 'Arm Exercises',
-      description: 'Arm strengthening and stretching',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-    },
-    breathing: {
-      title: 'Breathing Exercises',
-      description: 'Breathing techniques and relaxation',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-    }
-  }
+  const handleCategoryClick = (categoryId) => {
+    onNavigate('exerciseDetail', { exerciseId: categoryId });
+  };
 
   return (
     <div className="exercises-page fade-in">
@@ -65,42 +26,22 @@ function Exercises({ onNavigate }) {
       </div>
 
       <div className="exercises-content">
-        <div className="categories-nav">
+        <div className="exercise-grid">
           {categories.map(category => (
-            <button
+            <div
               key={category.id}
-              className={`category-btn ${selectedCategory === category.id ? 'active' : ''}`}
-              onClick={() => setSelectedCategory(category.id)}
+              className="exercise-card"
+              onClick={() => handleCategoryClick(category.id)}
             >
-              <span className="category-icon">{category.icon}</span>
-              <span className="category-name">{category.name}</span>
-            </button>
+              <div className="exercise-icon">{category.icon}</div>
+              <h3>{category.name}</h3>
+              <p>{category.description}</p>
+            </div>
           ))}
         </div>
-
-        <div className="video-section">
-          <VideoPlayer 
-            title={videos[selectedCategory].title}
-            description={videos[selectedCategory].description}
-            videoUrl={videos[selectedCategory].videoUrl}
-          />
-          
-          <button 
-            className="history-btn"
-            onClick={() => setShowHistory(true)}
-          >
-            📊 Recommendation History
-          </button>
-        </div>
       </div>
-
-      {showHistory && (
-        <HistoryPopup 
-          onClose={() => setShowHistory(false)}
-        />
-      )}
     </div>
-  )
+  );
 }
 
-export default Exercises
+export default Exercises;

@@ -43,35 +43,37 @@
 }
 
 .exercises-content {
-  display: flex;
   flex: 1;
-  gap: 20px;
-}
-
-.categories-nav {
-  width: 200px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
-.category-btn {
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.exercise-card {
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-  border: 2px solid #333;
-  color: #fff;
-  padding: 15px;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  border-radius: 20px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
   position: relative;
   overflow: hidden;
 }
 
-.category-btn::before {
+.exercise-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -84,61 +86,34 @@
   z-index: 1;
 }
 
-.category-btn:hover::before {
+.exercise-card:hover::before {
   opacity: 0.1;
 }
 
-.category-btn.active::before {
-  opacity: 0.2;
-}
-
-.category-btn:hover {
-  transform: translateY(-3px);
+.exercise-card:hover {
+  transform: translateY(-10px) scale(1.05);
   border-color: #4f46e5;
-  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3);
 }
 
-.category-btn.active {
-  border-color: #4f46e5;
-  box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
-}
-
-.category-icon {
-  font-size: 1.5rem;
+.exercise-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
   z-index: 2;
-  position: relative;
 }
 
-.category-name {
+.exercise-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 10px 0;
+  z-index: 2;
+}
+
+.exercise-card p {
   font-size: 0.9rem;
-  font-weight: 600;
+  color: #a0a0a0;
+  margin: 0;
   z-index: 2;
-  position: relative;
-}
-
-.video-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.history-btn {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  border: none;
-  color: white;
-  padding: 15px 25px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  align-self: flex-start;
-}
-
-.history-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+  line-height: 1.5;
 }

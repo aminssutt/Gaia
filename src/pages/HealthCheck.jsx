@@ -5,7 +5,7 @@ import HealthData from '../components/HealthData'
 import RecommendationPopup from '../components/RecommendationPopup'
 import './HealthCheck.css'
 
-function HealthCheck({ onNavigate }) {
+function HealthCheck({ onNavigate, gender }) {
   const [healthData, setHealthData] = useState({
     heartBeat: 72,
     tension: 120,
@@ -105,15 +105,16 @@ function HealthCheck({ onNavigate }) {
 
         <div className="avatar-container">
           <Canvas
-            camera={{ position: [0, 6, 6], fov: 55 }}
+            camera={{ position: [0, 1, 5], fov: 55 }}
             style={{ width: '600px', height: '500px' }}
+            onPointerMiss={() => console.log('miss')}
           >
             <ambientLight intensity={0.6} />
             <directionalLight position={[10, 10, 5]} intensity={1} />
             <directionalLight position={[-10, -10, -5]} intensity={0.3} />
-            <AvatarViewer gender="male" />
+            <AvatarViewer gender={gender} onNavigate={onNavigate} />
           </Canvas>
-          <button 
+          <button s
             className={`test-data-btn ${isTesting ? 'testing' : ''}`}
             onClick={startTest}
             disabled={isTesting}

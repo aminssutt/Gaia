@@ -9,7 +9,7 @@ function Accessories({ onNavigate }) {
       id: 1,
       name: 'Pillow Massage',
       description: 'Therapeutic massage pillow for comfort and relaxation',
-      price: '$89.99',
+      price: '$49.99',
       image: '🛏️',
       features: ['Automatic massage', 'Built-in heating', 'Bluetooth connectivity']
     },
@@ -17,7 +17,7 @@ function Accessories({ onNavigate }) {
       id: 2,
       name: 'Scent Diffuser',
       description: 'Aroma diffuser to create a relaxing atmosphere',
-      price: '$49.99',
+      price: '$15.99',
       image: '🌸',
       features: ['Color LED', 'Automatic timer', 'Essential oils included']
     },
@@ -25,7 +25,7 @@ function Accessories({ onNavigate }) {
       id: 3,
       name: 'Fresh Air Purifier',
       description: 'Portable air purifier for a healthy environment',
-      price: '$129.99',
+      price: '$39.99',
       image: '💨',
       features: ['HEPA filter', 'Ionization', 'Air quality sensor']
     },

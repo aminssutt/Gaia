@@ -1,17 +1,23 @@
 .main-page {
-  width: 100%;
-  height: 100%;
+  width: 1800px;
+  height: 720px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 40px;
+  justify-content: space-evenly;
+  padding: 20px;
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  box-sizing: border-box;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 60px;
 }
 
 .app-title {
@@ -35,12 +41,11 @@
 .main-options {
   display: flex;
   gap: 40px;
-  margin-bottom: 60px;
 }
 
 .option-card {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
   border-radius: 20px;
   display: flex;
@@ -101,8 +106,28 @@
   position: relative;
 }
 
+.gender-selection {
+  display: flex;
+  gap: 20px;
+}
+
+.gender-btn {
+  background-color: #2a2a2a;
+  border: 2px solid #4f46e5;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gender-btn.active {
+  background-color: #4f46e5;
+  box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
+}
+
 .accessories-section {
-  text-align: center;
+  margin-top: 0;
 }
 
 .accessories-section h2 {
@@ -179,4 +204,9 @@
   margin: 0;
   z-index: 2;
   position: relative;
+}
+
+.accessories-card {
+  width: 540px; /* width of 2 cards + gap */
+  height: 150px;
 }
