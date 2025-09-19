@@ -9,18 +9,18 @@ const pointsData = {
   male: [
     { id: 'head', position: [0, 1.7, 0], label: 'Head' },
     { id: 'neck', position: [0, 1.4, 0], label: 'Neck' },
-    { id: 'shoulders', position: [0.3, 1.2, 0], label: 'Shoulders' },
-    { id: 'arms', position: [-0.46, 0.9, 0], label: 'Arms' },
-    { id: 'wrists', position: [0.76, 0.3, 0.1], label: 'Wrists' },
+    { id: 'shoulders', position: [0.25, 1.2, -0.26], label: 'Shoulders' },
+    { id: 'arms', position: [-0.46, 0.9, 0.12], label: 'Arms' },
+    { id: 'wrists', position: [0.6, 0.34, -0.4], label: 'Wrists' },
     { id: 'back', position: [0, 0.5, -0.15], label: 'Back' },
     { id: 'legs', position: [0.2, 0, 0], label: 'Legs' },
   ],
   female: [
     { id: 'head', position: [0, 1.2, -0.03], label: 'Head' },
     { id: 'neck', position: [0, 1.0, -0.04], label: 'Neck' },
-    { id: 'shoulders', position: [0.24, 0.8, -0.1], label: 'Shoulders' },
+    { id: 'shoulders', position: [0.13, 0.8, -0.24], label: 'Shoulders' },
     { id: 'arms', position: [-0.33, 0.6, 0.1], label: 'Arms' },
-    { id: 'wrists', position: [0.56, 0.2, -0.3], label: 'Wrists' },
+    { id: 'wrists', position: [0.45, 0.2, -0.3], label: 'Wrists' },
     { id: 'back', position: [0, 0.4, -0.15], label: 'Back' },
     { id: 'legs', position: [0.15, -0.1, 0], label: 'Legs' },
   ],
@@ -28,7 +28,11 @@ const pointsData = {
 
 function Model({ gender, onShowConfirmation }) {
   const groupRef = useRef();
-  const gltf = useLoader(GLTFLoader, gender === 'male' ? '/avatars/man_muscle_human_body.glb' : '/avatars/female_muscle_human_body.glb');
+  const base = import.meta.env.BASE_URL || '/';
+  const gltfPath = gender === 'male'
+    ? `${base}avatars/man_muscle_human_body.glb`
+    : `${base}avatars/female_muscle_human_body.glb`;
+  const gltf = useLoader(GLTFLoader, gltfPath);
 
   return (
     <group ref={groupRef}>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ConfirmationPopup from '../components/ConfirmationPopup'
 import './Accessories.css'
 
 function Accessories({ onNavigate }) {
@@ -49,6 +50,29 @@ function Accessories({ onNavigate }) {
 
   const currentAccessory = accessories[currentIndex]
 
+  const [showConfirm, setShowConfirm] = useState(false)
+
+  const handleAccessoryClick = (index) => {
+    setCurrentIndex(index)
+    const acc = accessories[index]
+    if (acc.id === 1) {
+      // pillow -> show confirmation popup
+      setShowConfirm(true)
+    } else if (acc.id === 2) {
+      // scent diffuser -> confirmation as preview
+      setShowConfirm(true)
+    }
+  }
+
+  const handleConfirm = () => {
+    setShowConfirm(false)
+    const acc = accessories[currentIndex]
+    if (acc.id === 1) onNavigate('pillowPreview')
+    else if (acc.id === 2) onNavigate('scentPreview')
+  }
+
+  const handleCancel = () => setShowConfirm(false)
+
   return (
     <div className="accessories-page fade-in">
       <div className="accessories-header">
@@ -66,10 +90,10 @@ function Accessories({ onNavigate }) {
           
           <div className="accessories-grid">
             {accessories.map((accessory, index) => (
-              <div 
+              <div
                 key={accessory.id}
                 className={`accessory-card ${index === currentIndex ? 'active' : ''}`}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => handleAccessoryClick(index)}
               >
                 <div className="accessory-image">{accessory.image}</div>
                 <h3>{accessory.name}</h3>
@@ -112,6 +136,13 @@ function Accessories({ onNavigate }) {
           </div>
         </div>
       </div>
+      {showConfirm && (
+        <ConfirmationPopup
+          bodyPart={currentAccessory.id === 1 ? 'pillow' : currentAccessory.id === 2 ? 'scent' : currentAccessory.name}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
+      )}
     </div>
   )
 }

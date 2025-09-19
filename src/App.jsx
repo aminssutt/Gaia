@@ -3,6 +3,8 @@ import MainPage from './pages/MainPage'
 import HealthCheck from './pages/HealthCheck'
 import Exercises from './pages/Exercises'
 import Accessories from './pages/Accessories'
+import PillowPreview from './pages/PillowPreview'
+import ScentPreview from './pages/ScentPreview'
 import './App.css'
 
 import ExerciseDetail from './pages/ExerciseDetail';
@@ -33,6 +35,10 @@ function App() {
         return <ExerciseDetail onNavigate={handleNavigate} exerciseId={pageContext?.exerciseId} />;
       case 'accessories':
         return <Accessories onNavigate={handleNavigate} />;
+      case 'pillowPreview':
+        return <PillowPreview onNavigate={handleNavigate} />;
+      case 'scentPreview':
+        return <ScentPreview onNavigate={handleNavigate} />;
       default:
         return <MainPage onNavigate={handleNavigate} onGenderChange={handleGenderChange} gender={gender} />;
     }

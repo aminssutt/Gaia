@@ -7,10 +7,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "node scripts/copy404.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "deploy:worktree": "node scripts/deploy-worktree.js",
+    "build:docs": "rimraf docs && npm run build && copy dist\\index.html docs\\index.html"
   },
   "dependencies": {
     "react": "^18.2.0",
